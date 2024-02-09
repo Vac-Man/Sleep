@@ -1,0 +1,36 @@
+import java.time.LocalTime;
+
+public class HealthySleepCalculator {
+    public static void main(String[] args) {
+        int age = 30; // Enter your age here
+        
+        int recommendedSleep = calculateRecommendedSleep(age);
+        System.out.println("Recommended Sleep Duration: " + recommendedSleep + " hours");
+
+        LocalTime bedTime = calculateBedTime(recommendedSleep);
+        System.out.println("Bedtime: " + bedTime);
+    }
+
+    private static int calculateRecommendedSleep(int age) {
+        int recommendedSleep = 0;
+        if (age >= 0 && age <= 3) {
+            recommendedSleep = 14;
+        } else if (age >= 4 && age <= 12) {
+            recommendedSleep = 10;
+        } else if (age >= 13 && age <= 17) {
+            recommendedSleep = 9;
+        } else if (age >= 18 && age <= 64) {
+            recommendedSleep = 8;
+        } else if (age >= 65) {
+            recommendedSleep = 7;
+        }
+        return recommendedSleep;
+    }
+
+    private static LocalTime calculateBedTime(int recommendedSleep) {
+        LocalTime currentTime = LocalTime.now();
+        LocalTime wakeUpTime = currentTime.plusHours(recommendedSleep);
+
+        return wakeUpTime.minusHours(8); // Assuming 8 hours of sleep is required to wake up refreshed
+    }
+}
